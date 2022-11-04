@@ -36,7 +36,23 @@ function getURLsFromHTML(htmlBody, baseURL) {
   return urlArr;
 }
 
+async function crawlPage(baseURL) {
+  try {
+    const response = await fetch(baseURL, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "text/html",
+      },
+    });
+    return response.text();
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
 module.exports = {
+  crawlPage,
   normalizeURL,
   getURLsFromHTML,
 };
